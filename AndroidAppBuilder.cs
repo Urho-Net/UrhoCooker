@@ -134,8 +134,6 @@ namespace UrhoCooker
                 }
 
                 File.Copy(Path.Combine(opts.ProjectPath, "Obfuscator_Output/Game.dll"),Path.Combine(opts.ProjectPath, "Intermediate/Game.dll"),true);
-                // Path.Combine(opts.ProjectPath, "Obfuscator_Output").DeleteDirectory();
-                //
             }
 
             if (opts.Encrypt)
@@ -181,7 +179,7 @@ namespace UrhoCooker
                 Log.LogError($"encryption key file not found {Path.Combine(opts.ProjectPath, opts.EncryptKeyPath)}");
                 return false ;
             }
-            //  commandLine '../../tools/UrhoEncription','../../Intermediate/Game.dll','./src/main/assets/Data/DotNet','../../script/encryption_key.txt'
+
             string keyStr = File.ReadAllText(Path.Combine(opts.ProjectPath, opts.EncryptKeyPath));
             byte[] encryption_key = Encoding.ASCII.GetBytes(keyStr);
             if (encryption_key.Count() == 0)
@@ -358,11 +356,6 @@ namespace UrhoCooker
 
         private void HandleOverwrites()
         {
-
-            // if (File.Exists(Path.Combine(opts.ProjectPath, "overwrite/build.gradle")))
-            // {
-            //     File.Copy(Path.Combine(opts.ProjectPath, "overwrite/build.gradle"), Path.Combine(opts.OutputPath, "Android/app/build.gradle"), true);
-            // }
 
             if (Directory.Exists(Path.Combine(opts.ProjectPath, "overwrite/res")))
             {
