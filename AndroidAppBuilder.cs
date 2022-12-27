@@ -889,6 +889,13 @@ namespace UrhoCooker
             {
                 AndroidManifest.AppendTextLine($"   <uses-permission android:name=\"{i}\"/>");
             }
+            
+    
+            if (File.Exists(Path.Combine(opts.ProjectPath, "platform/android/manifest/AndroidManifest.xml")))
+            {
+                string extra = File.ReadAllText(Path.Combine(opts.ProjectPath, "platform/android/manifest/AndroidManifest.xml"));
+                AndroidManifest.AppendText(extra);
+            }
 
             AndroidManifest.AppendTextLine("   <application android:allowBackup=\"true\" android:icon=\"@mipmap/ic_launcher\" android:label=\"@string/app_name\" android:roundIcon=\"@mipmap/ic_launcher_round\" android:supportsRtl=\"true\" android:theme=\"@style/AppTheme\">");
 
@@ -908,6 +915,7 @@ namespace UrhoCooker
 
             AndroidManifest.AppendTextLine($"      <activity android:name=\".UrhoMainActivity\" android:exported=\"true\" android:configChanges=\"keyboardHidden|orientation|screenSize\" android:screenOrientation=\"landscape\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\"/>");
 
+          
             AndroidManifest.AppendTextLine($"   </application>");
             AndroidManifest.AppendTextLine($"</manifest>");
 
