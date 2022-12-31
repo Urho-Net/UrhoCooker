@@ -911,6 +911,13 @@ namespace UrhoCooker
             AndroidManifest.AppendTextLine($"              <action android:name=\"android.intent.action.MAIN\" />");
             AndroidManifest.AppendTextLine($"              <category android:name=\"android.intent.category.LAUNCHER\" />");
             AndroidManifest.AppendTextLine($"          </intent-filter>");
+            
+            if (File.Exists(Path.Combine(opts.ProjectPath, "platform/android/manifest/IntentFilters.xml")))
+            {
+                string extra = File.ReadAllText(Path.Combine(opts.ProjectPath, "platform/android/manifest/IntentFilters.xml"));
+                AndroidManifest.AppendText(extra);
+            }
+
             AndroidManifest.AppendTextLine($"      </activity>");
 
             AndroidManifest.AppendTextLine($"      <activity android:name=\".UrhoMainActivity\" android:exported=\"true\" android:configChanges=\"keyboardHidden|orientation|screenSize\" android:screenOrientation=\"landscape\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\"/>");
