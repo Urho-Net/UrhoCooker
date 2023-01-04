@@ -359,7 +359,6 @@ namespace UrhoCooker
 
             if (Directory.Exists(Path.Combine(opts.ProjectPath, "overwrite/res")))
             {
-                Path.Combine(opts.OutputPath, "Android/app/src/main/res").DeleteDirectory();
                 Path.Combine(opts.ProjectPath, "overwrite/res").CopyDirectory(Path.Combine(opts.OutputPath, "Android/app/src/main/res"));
             }
         }
@@ -922,6 +921,11 @@ namespace UrhoCooker
 
             AndroidManifest.AppendTextLine($"      <activity android:name=\".UrhoMainActivity\" android:exported=\"true\" android:configChanges=\"keyboardHidden|orientation|screenSize\" android:screenOrientation=\"landscape\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\"/>");
 
+            if (File.Exists(Path.Combine(opts.ProjectPath, "platform/android/manifest/Activities.xml")))
+            {
+                string extra = File.ReadAllText(Path.Combine(opts.ProjectPath, "platform/android/manifest/Activities.xml"));
+                AndroidManifest.AppendText(extra);
+            }
           
             AndroidManifest.AppendTextLine($"   </application>");
             AndroidManifest.AppendTextLine($"</manifest>");

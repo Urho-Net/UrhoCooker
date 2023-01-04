@@ -348,6 +348,7 @@ namespace UrhoCooker
             foreach (FileInfo file in dir.GetFiles())
             {
                 string targetFilePath = Path.Combine(destinationDir, file.Name);
+                File.Delete(targetFilePath);
                 file.CopyTo(targetFilePath, true);
             }
 
