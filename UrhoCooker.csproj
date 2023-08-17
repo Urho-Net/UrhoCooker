@@ -17,6 +17,7 @@
 
   <ItemGroup>
   <PackageReference Include="CommandLineParser" Version="2.9.1" />
+  <PackageReference Include="CliWrap" Version="3.6.0" />
  </ItemGroup>
 
 

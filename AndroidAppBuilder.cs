@@ -919,7 +919,17 @@ namespace UrhoCooker
 
             AndroidManifest.AppendTextLine($"      </activity>");
 
-            AndroidManifest.AppendTextLine($"      <activity android:name=\".UrhoMainActivity\" android:exported=\"true\" android:configChanges=\"keyboardHidden|orientation|screenSize\" android:screenOrientation=\"landscape\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\"/>");
+            string SCREEN_ORIENTATION = GetEnvValue("SCREEN_ORIENTATION");
+            if (SCREEN_ORIENTATION == string.Empty)
+            {
+                SCREEN_ORIENTATION = "landscape";
+            }
+            if(SCREEN_ORIENTATION != "landscape" && SCREEN_ORIENTATION != "portrait")
+            {
+                SCREEN_ORIENTATION = "landscape";
+            }
+
+            AndroidManifest.AppendTextLine($"      <activity android:name=\".UrhoMainActivity\" android:exported=\"true\" android:configChanges=\"keyboardHidden|orientation|screenSize\" android:screenOrientation=\"{SCREEN_ORIENTATION}\" android:theme=\"@android:style/Theme.NoTitleBar.Fullscreen\"/>");
 
             if (File.Exists(Path.Combine(opts.ProjectPath, "platform/android/manifest/Activities.xml")))
             {

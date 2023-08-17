@@ -274,6 +274,70 @@ namespace UrhoCooker
             debugMessageImportance: MessageImportance.High,
             label: "plist-update");
 
+            string SCREEN_ORIENTATION = GetEnvValue("SCREEN_ORIENTATION");
+            if (SCREEN_ORIENTATION == string.Empty)
+            {
+                SCREEN_ORIENTATION = "landscape";
+            }
+            if (SCREEN_ORIENTATION != "landscape" && SCREEN_ORIENTATION != "portrait")
+            {
+                SCREEN_ORIENTATION = "landscape";
+            }
+
+            Utils.RunShellCommand(Log,
+                $"plutil -remove UISupportedInterfaceOrientations  {envVars["URHO3D_HOME"]}/CMake/Modules/iOSBundleInfo.plist.template",
+                envVars,
+                workingDir: Path.Combine(opts.OutputPath, "IOS"),
+                logStdErrAsMessage: true,
+                debugMessageImportance: MessageImportance.High,
+                label: "plist-update");
+
+            Utils.RunShellCommand(Log,
+                $"plutil -insert UISupportedInterfaceOrientations -array  {envVars["URHO3D_HOME"]}/CMake/Modules/iOSBundleInfo.plist.template",
+                envVars,
+                workingDir: Path.Combine(opts.OutputPath, "IOS"),
+                logStdErrAsMessage: true,
+                debugMessageImportance: MessageImportance.High,
+                label: "plist-update");
+
+
+            if (SCREEN_ORIENTATION == "landscape")
+            {
+                Utils.RunShellCommand(Log,
+                     $"plutil -insert UISupportedInterfaceOrientations -string UIInterfaceOrientationLandscapeLeft -append {envVars["URHO3D_HOME"]}/CMake/Modules/iOSBundleInfo.plist.template",
+                     envVars,
+                     workingDir: Path.Combine(opts.OutputPath, "IOS"),
+                     logStdErrAsMessage: true,
+                     debugMessageImportance: MessageImportance.High,
+                     label: "plist-update");
+
+                Utils.RunShellCommand(Log,
+                     $"plutil -insert UISupportedInterfaceOrientations -string UIInterfaceOrientationLandscapeRight -append {envVars["URHO3D_HOME"]}/CMake/Modules/iOSBundleInfo.plist.template",
+                     envVars,
+                     workingDir: Path.Combine(opts.OutputPath, "IOS"),
+                     logStdErrAsMessage: true,
+                     debugMessageImportance: MessageImportance.High,
+                     label: "plist-update");
+            }
+            else
+            {
+                Utils.RunShellCommand(Log,
+                     $"plutil -insert UISupportedInterfaceOrientations -string UIInterfaceOrientationPortrait -append {envVars["URHO3D_HOME"]}/CMake/Modules/iOSBundleInfo.plist.template",
+                     envVars,
+                     workingDir: Path.Combine(opts.OutputPath, "IOS"),
+                     logStdErrAsMessage: true,
+                     debugMessageImportance: MessageImportance.High,
+                     label: "plist-update");
+
+                Utils.RunShellCommand(Log,
+                     $"plutil -insert UISupportedInterfaceOrientations -string UIInterfaceOrientationPortraitUpsideDown -append {envVars["URHO3D_HOME"]}/CMake/Modules/iOSBundleInfo.plist.template",
+                     envVars,
+                     workingDir: Path.Combine(opts.OutputPath, "IOS"),
+                     logStdErrAsMessage: true,
+                     debugMessageImportance: MessageImportance.High,
+                     label: "plist-update");
+            }
+
 
             Utils.RunShellCommand(Log,
                            $"plutil -remove GADIsAdManagerApp  {envVars["URHO3D_HOME"]}/CMake/Modules/iOSBundleInfo.plist.template",
