@@ -491,7 +491,7 @@ namespace UrhoCooker
         {
             bool result = true;
             (int exitCode, string output)  = Utils.RunShellCommand(Log,
-                                      "dotnet build --configuration Debug -p:DefineConstants=_MOBILE_",
+                                      "dotnet build --configuration Debug -p:DefineConstants=_ANDROID_",
                                       null,
                                       workingDir: Path.Combine(opts.ProjectPath),
                                       logStdErrAsMessage: true,
@@ -506,7 +506,7 @@ namespace UrhoCooker
         {
             bool result = true;
             (int exitCode, string output)  = Utils.RunShellCommand(Log,
-                                      "dotnet build --configuration Release -p:DefineConstants=_MOBILE_",
+                                      "dotnet build --configuration Release -p:DefineConstants=_ANDROID_",
                                       null,
                                       workingDir: Path.Combine(opts.ProjectPath),
                                       logStdErrAsMessage: true,

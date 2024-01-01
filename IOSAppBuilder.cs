@@ -454,7 +454,7 @@ namespace UrhoCooker
                 buildType = "Release";
             }
 
-            string dotnet_build_command = $"dotnet build --configuration {buildType} -p:DefineConstants=_MOBILE_ ";
+            string dotnet_build_command = $"dotnet build --configuration {buildType} -p:DefineConstants=_IOS_ ";
 
             (exitCode, output) = Utils.RunShellCommand(Log,
                                        dotnet_build_command,
